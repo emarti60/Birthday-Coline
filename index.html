@@ -375,6 +375,7 @@ function handleResponse(response) {
   alert(response.message);
 }
 function envoyerResultatJSONP(nom, score) {
+  console.log("Envoi JSONP en cours :", nom, score); // Ajout pour debug mobile
   const callbackName = 'handleResponse';
 
   const script = document.createElement('script');
@@ -395,6 +396,7 @@ function endQuiz() {
   </script>
 </body>
 </html>
+
 
 
 
