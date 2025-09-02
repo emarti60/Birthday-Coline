@@ -371,26 +371,25 @@ function nextQuestion() {
   }
 }
 
-function envoyerResultat(nom, score) {
-  const data = { nom: nom, score: score };
-  console.log("Données envoyées : ", data);
-  fetch('https://script.google.com/macros/s/AKfycbwyv_qiKwtyX89wfKwHMrDqq3qMueoKyv9k5cULS-Pr5KlUoiFhHnOZrZ31Ze-E9Usc/exec', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: { 'Content-Type': 'application/json' }
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Réponse du serveur : ", data);
-    if (data.result === "success") {
+function envoyerResultatJSONP(nom, score) {
+  const callbackName = 'handleResponse';
+
+  window[callbackName] = function(response) {
+    console.log("Réponse du serveur :", response);
+    if (response.result === "success") {
       console.log("Score envoyé avec succès !");
     } else {
-      console.error("Erreur d'envoi du score : ", data.message);
+      console.error("Erreur d'envoi :", response.message);
     }
-  })
-  .catch(error => {
-    console.error("Erreur réseau : ", error);
-  });
+    // Nettoyage
+    delete window[callbackName];
+    script.remove();
+  };
+
+  const script = document.createElement('script');
+  const url = `https://script.google.com/macros/s/TON_SCRIPT_ID/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
+  script.src = url;
+  document.body.appendChild(script);
 }
 
 function endQuiz() {
@@ -399,9 +398,10 @@ function endQuiz() {
   document.getElementById('final-score').textContent = `${playerName}, tu as obtenu ${score} bonne(s) réponse(s) sur ${questions.length} !`;
   
   // Envoie du score
-  envoyerResultat(playerName, score);
+  envoyerResultatJSONP(playerName, score);
 }
   </script>
 </body>
 </html>
+
 
