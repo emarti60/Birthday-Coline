@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Who knows Coline best? Edition Sunset Fever Party</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to top right, #ff5f6d, #ffc3a0);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-size: cover;
+      text-align: center;
+      position: relative;
+    }
+
+    .sunset-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('sunset.png') no-repeat center center;
+      background-size: cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .container {
+      background: rgba(255, 99, 71, 0.4);
+      backdrop-filter: blur(6px); 
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+      z-index: 1;
+    }
+
+    .container:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #fffcf9;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #ffe2e2;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      background: #ff6347;
+      color: #fff;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff8500;
+      box-shadow: 0 0 15px rgba(255, 134, 0, 0.7);
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      background: #ffe2e2;
+      color: #333;
+      font-size: 1.2em;
+    }
+
+    #result {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #fffcf9;
+    }
+
+    #next-button {
+      background: #ff8500;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    /* Responsive - Tablettes */
+    @media screen and (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .btn {
+        font-size: 1em;
+        padding: 10px;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+
+    /* Responsive - Mobiles */
+    @media screen and (max-width: 480px) {
+      .container {
+        width: 95%;
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.6em;
+      }
+
+      .btn {
+        font-size: 0.9em;
+        padding: 8px;
+      }
+
+      input {
+        font-size: 1em;
+      }
+
+      .sunset-img {
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Image de fond -->
+  <div class="sunset-img"></div>
+
+  <!-- Écran d'accueil -->
+  <div class="container" id="start-screen">
+    <h1>Bienvenue à la Sunset Fever Party! 🎉</h1>
+    <p>Teste tes connaissances sur Coline et tente de remporter un prix ! Let's go ?</p>
+    <p>Entre ton nom pour commencer :</p>
+    <input type="text" id="playerName" placeholder="Ton nom...">
+    <button class="btn" onclick="startQuiz()">Commencer</button>
+  </div>
+
+  <!-- Écran du quiz -->
+  <div class="container" id="quiz-screen" style="display:none;">
+    <h1>Quiz : Qui connait le mieux Coline ?</h1>
+    <p>☀️ Edition Sunset Fever Party ☀️</p>
+    <div id="quiz"></div>
+    <button onclick="nextQuestion()" class="btn" id="next-button" disabled>Question Suivante</button>
+    <p id="result"></p>
+  </div>
+
+  <!-- Écran de fin -->
+  <div class="container" id="end-screen" style="display:none;">
+    <h1>Quiz terminé 🎉</h1>
+    <p id="final-score"></p>
+    <p>✅ J'ai bien enregistré ton score. Rendez-vous plus tard dans la soirée pour les résultats. 🍾</p>
+  </div>
+
+  <!-- Script quiz -->
+  <script>
+    const questions = [
+      { question: "Je peux mourir de dégoût si j ingère : ?", answers: ["Du fromage, même sur une pizza !", "Du Get27, beaucoup trop vert !", "Les croutes des pizzas ! Beurk !", "La purée liquide, il faut qu elle soit épaisse enfin !"], correct: "Du fromage, même sur une pizza !" },
+      { question: "Quand j étais ado j avais un scooter et :", answers: ["je me le suis jamais fait voler, toujours un antivol !", "Je me le suis fait voler une fois", "je me le suis fait voler deux fois", "je me le suis fait voler trois fois un vrai chat noir !"], correct: "je me le suis fait voler deux fois" },
+      { question: "J ai toujours eu une âme d artiste, c est pour ça qu enfant :", answers: ["Je prenais des cours de comédie musicale, j ai même fait une représentation de Marie Poppins", "J adore la pâte fimo, je publiais des tutos Youtube et je vendais mes créations sur les marchés de noël", "Je prenais des cours de cirques, le cerceau n avait aucun secret pour moi et j ai même fait une tournée", "Je faisais du piano et j ai gagné quelques concours"], correct: "J adore la pâte fimo, je publiais des tutos Youtube et je vendais mes créations sur les marchés de noël" },
+      { question: "J aime toutes les couleurs, mais celle que je préfère c est : ", answers: ["Le bleu, surtout le marine", "Le marron, comme les yeux de Lorenzo", "Le violet, en référence à la team archi et du week-end d intégration", "Le blanc, comme mon scooter volé"], correct: "Le bleu, surtout le marine" },
+      { question: "Mon oral de mémoire Master 2 a été aussi laborieux que :", answers: ["Ma motivation pour aller courrir", "Mon PFE", "La réalisation de mes premiers ongles", "Mes choix parcoursup"], correct: "Mon PFE" },
+      { question: "Vous n êtes pas sans savoir que je suis une pilote hors pair :", answers: ["J ai donc eu mon permis du premier coup, les doigts dans le nez", "Je l ai eu la deuxième fois, le moniteur était pas cool", "Je l ai eu la troisième fois, mais avec tous les points !", "Le permis de conduire ? Il en faut un ?"], correct: "Je l ai eu la troisième fois, mais avec tous les points !" },
+      { question: "Vous connaissez tous notre Lolo national, il y a 10ans nous nous sommes rencontrés :", answers: ["Sur insta, pas original le type…", "Au pont levis, grâce à une amie", "Pendant un Speed Dating, tous les deux désespérés", "Au bal du lycée, un vrai conte de fée"], correct: "Au pont levis, grâce à une amie" },
+      { question: "Vous me connaissez pour mes regards tranchants, mais celui qui a eu le regard le plus noir est : ?", answers: ["Gaspard, quand il a tiré ma chaise en pleine cafétéria", "Lorenzo (de la danse), simplement car il est lui et ça suffit", "Camille, et le coup de la valise oubliée sur le bord de la route", "Mes jurés de mémoire, pas besoin d en dire plus"], correct: "Gaspard, quand il a tiré ma chaise en pleine cafétéria" },
+      { question: "Je tiens ce fameux regard noir de :", answers: ["Ma mère, des années d entrainement sur les quais de la SNCF", "Ma prof de classique, il ne fallait surtout pas oublier notre tenue !", "Mon père, très gentil mais il faut pas le chercher !", "De personne, c est inné"], correct: "Mon père, très gentil mais il faut pas le chercher !" },
+      { question: "A l école j étais plutôt :", answers: ["La meilleure élève, toujours devant et que des 20/20", "Bonne élève, mais j ai quand même risqué de me faire virer du lyçée une fois…", "Des gros problèmes de comportement, on pensait que j allais finir en prison", "L école ? J y allais pas"], correct: "Bonne élève, mais j ai quand même risqué de me faire virer du lyçée une fois…" },
+      { question: "Il se passe toujours des trucs fous à mes anniversaires, mais l évènement le plus marquant a été :", answers: ["Lorsque Lorenzo a fait du Ski dans mon jardin", "Lorsque j ai décidé de virer une invitée sur le pas de la porte", "Lorsque Johnny Hallyday est venu en Showcase", "Lorsque le plan de table a cramé"], correct: "Lorsque j ai décidé de virer une invitée sur le pas de la porte" },
+      { question: "L anecdote la plus inavouable sur moi est :", answers: ["J ai battu mon frère lors d un concours au fusil", "J ai chanté sur la scène du Zénith de Montpellier", "Lorenzo m a percuté en voiture", "J ai déjà oublié ma tenue de concours et je m en suis rendue compte juste avant de monter sur scène"], correct: "J ai chanté sur la scène du Zénith de Montpellier" },
+      { question: "Si j étais un animal, je serai :", answers: ["Un Calao, très protectrice et sociable", "Un escargot, il faut pas trop me brusquer", "Une abeille, toujours organisée et travailleuse", "Un furet, solitaire et tout le temps pleine d idées, il faudrait que je me recentre parfois."], correct: "Une abeille, toujours organisée et travailleuse" },
+      { question: "Mon signe astrologique en dit beaucoup sur moi, je suis :", answers: ["Capricorne, ambitieuse et responsable mais exigeante et travailleuse", "Scorpion, passionnée et déterminée mais rancunière et obsessionnelle", "Balance, diplomate et sociable mais indécise et dépendante", "Vierge, organisée et analytique mais, indécise et critique"], correct: "Vierge, organisée et analytique mais, indécise et critique" },
+      { question: "Je suis très maladroite mais ma dernière plus grosse chute date :", answers: ["De la semaine dernière quand je suis tombée dans la piscine", "De quand j étais petite, sur une balançoire avec ma cousine", "D il y a quelques années, quand je suis tombée du toit", "D il y a quelques mois, à la danse après un saut lorsque je faisais mon solo"], correct: "D il y a quelques mois, à la danse après un saut lorsque je faisais mon solo" }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let playerName = '';
+
+    function startQuiz() {
+      playerName = document.getElementById('playerName').value;
+      if (!playerName) {
+        alert('Tu as oublié de rentrer ton nom !');
+        return;
+      }
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('quiz-screen').style.display = 'block';
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const question = questions[currentQuestionIndex];
+      let quizHtml = `<p><strong>${question.question}</strong></p>`;
+      question.answers.forEach((answer) => {
+        quizHtml += `<button class="btn" onclick="checkAnswer('${answer}')">${answer}</button>`;
+      });
+      document.getElementById('quiz').innerHTML = quizHtml;
+    }
+
+    function checkAnswer(answer) {
+      const question = questions[currentQuestionIndex];
+      const resultText = document.getElementById('result');
+      const nextButton = document.getElementById('next-button');
+      const correctAnswer = question.correct;
+
+      if (answer === correctAnswer) {
+        resultText.textContent = 'Bonne réponse! ✅';
+        score++;
+      } else {
+        resultText.textContent = 'Mauvaise réponse 😓';
+      }
+
+      const buttons = document.querySelectorAll('#quiz .btn');
+      buttons.forEach(button => button.disabled = true);
+      nextButton.disabled = false;
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+        document.getElementById('result').textContent = '';
+        document.getElementById('next-button').disabled = true;
+      } else {
+        endQuiz();
+      }
+    }
+
+   function envoyerResultat(nom, score) {
+  const data = {
+    nom: nom,
+    score: score
+  };
+
+  console.log("Données envoyées : ", data);  // Log les données envoyées
+
+  fetch('https://script.google.com/macros/s/AKfycbwyv_qiKwtyX89wfKwHMrDqq3qMueoKyv9k5cULS-Pr5KlUoiFhHnOZrZ31Ze-E9Usc/exec', {
+    method: 'POST',
+    body: JSON.stringify(data),  // Assurez-vous d'envoyer les données en JSON
+    headers: {
+      'Content-Type': 'application/json'  // Assure-toi que le type est bien JSON
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Réponse du serveur : ", data);  // Log la réponse du serveur
+    if (data.result === "success") {
+      console.log("Score envoyé avec succès !");
+    } else {
+      console.error("Erreur d'envoi du score : ", data.message);
+    }
+  })
+  .catch(error => {
+    console.error("Erreur réseau : ", error);
+  });
+}
+
+    function endQuiz() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('end-screen').style.display = 'block';
+  document.getElementById('final-score').textContent = `${playerName}, tu as obtenu ${score} sur ${questions.length} réponses correctes !👏`;
+
+  // Envoi des résultats
+  envoyerResultat(playerName, score);
+}
+  </script>
+</body>
+</html>
