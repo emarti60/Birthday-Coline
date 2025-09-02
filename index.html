@@ -256,7 +256,7 @@
       }
     }
 
-function envoyerResultat(nom, score) {
+    function envoyerResultat(nom, score) {
   console.log("Nom :", nom);
   console.log("Score :", score);
 
@@ -266,22 +266,27 @@ function envoyerResultat(nom, score) {
 
   fetch('https://script.google.com/macros/s/AKfycbzornCxtNWJJ0SdT1KrwtOFWwj3RRUGeofRbHGTkZK-_SWvGNBVdNW6tqvDlIDo4Pgm/exec', {
     method: 'POST',
-    mode: 'no-cors',  // ← très important
-    body: formData    // ← pas de JSON, pas de headers !
+    mode: 'no-cors',
+    body: formData
   });
 
-    function endQuiz() {
+  console.log("Données envoyées au script");
+}
+
+function endQuiz() {
   document.getElementById('quiz-screen').style.display = 'none';
   document.getElementById('end-screen').style.display = 'block';
   document.getElementById('final-score').textContent = `${playerName}, tu as obtenu ${score} sur ${questions.length} réponses correctes !👏`;
 
-  // Envoi des résultats
+  envoyerResultat(playerName, score);
+}
   envoyerResultat(playerName, score);
 }
   </script>
 </body>
 
 </html>
+
 
 
 
