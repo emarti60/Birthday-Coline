@@ -370,7 +370,10 @@ function nextQuestion() {
     endQuiz();
   }
 }
-
+function handleResponse(response) {
+  console.log("Réponse reçue :", response);
+  alert(response.message);
+}
 function envoyerResultatJSONP(nom, score) {
   const callbackName = 'handleResponse';
 
@@ -403,6 +406,7 @@ function endQuiz() {
   </script>
 </body>
 </html>
+
 
 
 
