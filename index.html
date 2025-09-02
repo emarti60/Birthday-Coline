@@ -378,18 +378,11 @@ function envoyerResultatJSONP(nom, score) {
   const callbackName = 'handleResponse';
 
   const script = document.createElement('script');
-
-  window[callbackName] = function(response) {
-    console.log("Réponse du serveur :", response);
-    if (response.result === "success") {
-      console.log("Score envoyé avec succès !");
-    } else {
-      console.error("Erreur d'envoi :", response.message);
-    }
-    // Nettoyage
-    delete window[callbackName];
-    script.remove();
-  };
+  const url = `https://script.google.com/macros/s/AKfycbwAy3JnpWdbNN9-Dq23N6Q2VrvMZ70C6HhwhHaQOEU2Mi0ximUOgQbkJAW-kCjuxvdO/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
+  
+  script.src = url;
+  document.body.appendChild(script);
+}
 
   const url = `https://script.google.com/macros/s/AKfycbwAy3JnpWdbNN9-Dq23N6Q2VrvMZ70C6HhwhHaQOEU2Mi0ximUOgQbkJAW-kCjuxvdO/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
   script.src = url;
@@ -407,6 +400,7 @@ function endQuiz() {
   </script>
 </body>
 </html>
+
 
 
 
