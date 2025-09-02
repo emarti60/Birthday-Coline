@@ -387,7 +387,7 @@ function envoyerResultatJSONP(nom, score) {
   };
 
   const script = document.createElement('script');
-  const url = `https://script.google.com/macros/s/TON_SCRIPT_ID/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
+  const url = `https://script.google.com/macros/s/AKfycbzornCxtNWJJ0SdT1KrwtOFWwj3RRUGeofRbHGTkZK-_SWvGNBVdNW6tqvDlIDo4Pgm/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
   script.src = url;
   document.body.appendChild(script);
 }
@@ -403,5 +403,6 @@ function endQuiz() {
   </script>
 </body>
 </html>
+
 
 
