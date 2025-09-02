@@ -127,8 +127,7 @@
         width: 100%;
       }
     }
-
-    /* Responsive - Mobiles */
+    
     @media screen and (max-width: 480px) {
       .container {
         width: 95%;
@@ -263,18 +262,18 @@
     score: score
   };
 
-  console.log("Données envoyées : ", data);  // Log les données envoyées
+  console.log("Données envoyées : ", data);
 
   fetch('https://script.google.com/macros/s/AKfycbwyv_qiKwtyX89wfKwHMrDqq3qMueoKyv9k5cULS-Pr5KlUoiFhHnOZrZ31Ze-E9Usc/exec', {
     method: 'POST',
-    body: JSON.stringify(data),  // Assurez-vous d'envoyer les données en JSON
+    body: JSON.stringify(data),
     headers: {
-      'Content-Type': 'application/json'  // Assure-toi que le type est bien JSON
+      'Content-Type': 'application/json'
     }
   })
   .then(response => response.json())
   .then(data => {
-    console.log("Réponse du serveur : ", data);  // Log la réponse du serveur
+    console.log("Réponse du serveur : ", data);
     if (data.result === "success") {
       console.log("Score envoyé avec succès !");
     } else {
@@ -296,4 +295,5 @@
 }
   </script>
 </body>
+
 </html>
