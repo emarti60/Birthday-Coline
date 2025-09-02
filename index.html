@@ -391,7 +391,7 @@ function envoyerResultatJSONP(nom, score) {
     script.remove();
   };
 
-  const url = `https://script.google.com/macros/s/AKfycbzornCxtNWJJ0SdT1KrwtOFWwj3RRUGeofRbHGTkZK-_SWvGNBVdNW6tqvDlIDo4Pgm/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
+  const url = `https://script.google.com/macros/s/AKfycbwAy3JnpWdbNN9-Dq23N6Q2VrvMZ70C6HhwhHaQOEU2Mi0ximUOgQbkJAW-kCjuxvdO/exec?nom=${encodeURIComponent(nom)}&score=${encodeURIComponent(score)}&callback=${callbackName}`;
   script.src = url;
   document.body.appendChild(script);
 }
@@ -407,6 +407,7 @@ function endQuiz() {
   </script>
 </body>
 </html>
+
 
 
 
