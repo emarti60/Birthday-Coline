@@ -266,17 +266,9 @@ function envoyerResultat(nom, score) {
 
   fetch('https://script.google.com/macros/s/AKfycbzornCxtNWJJ0SdT1KrwtOFWwj3RRUGeofRbHGTkZK-_SWvGNBVdNW6tqvDlIDo4Pgm/exec', {
     method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Réponse du serveur : ", data);
-  })
-  .catch(error => {
-    console.error("Erreur réseau : ", error);
+    mode: 'no-cors',  // ← très important
+    body: formData    // ← pas de JSON, pas de headers !
   });
-}
-
 
     function endQuiz() {
   document.getElementById('quiz-screen').style.display = 'none';
@@ -290,6 +282,7 @@ function envoyerResultat(nom, score) {
 </body>
 
 </html>
+
 
 
 
