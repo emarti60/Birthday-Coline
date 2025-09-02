@@ -256,16 +256,19 @@
       }
     }
 
- function envoyerResultat(nom, score) {
+function envoyerResultat(nom, score) {
+  console.log("Nom :", nom);
+  console.log("Score :", score);
+
   const formData = new FormData();
   formData.append("nom", nom);
   formData.append("score", score);
 
-  fetch('https://script.google.com/macros/s/AKfycbwyv_qiKwtyX89wfKwHMrDqq3qMueoKyv9k5cULS-Pr5KlUoiFhHnOZrZ31Ze-E9Usc/exec', {
+  fetch('https://script.google.com/macros/s/TON_ID_SCRIPT/exec', {
     method: 'POST',
     body: formData
   })
-  .then(response => response.text())
+  .then(response => response.json())
   .then(data => {
     console.log("Réponse du serveur : ", data);
   })
@@ -287,4 +290,5 @@
 </body>
 
 </html>
+
 
